@@ -9,9 +9,12 @@
         <h1>Lista de Produtos <h1>
         <h2> 
         <a href="./paginaInicial.html">
-        <strong> Lista de Produtos </strong>
+        <strong> Pagina Inicial </strong>
         </a>
         <h2>
-       
+        <h3>Dados do produto</h3>
+        <p>Nome: <span th:text="${produto.nome}"></span></p>
+        <p>Descrição: <span th:text="${produto.descricao}"></span></p>
+        <p>Valor:: <span th:text="${produto.valor}"></span></p>   
     </body>
 </html>

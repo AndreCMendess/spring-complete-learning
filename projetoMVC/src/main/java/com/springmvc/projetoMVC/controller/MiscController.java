@@ -1,4 +1,5 @@
 package com.springmvc.projetoMVC.controller;
+import com.springmvc.projetoMVC.controller.model.Produto;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,14 @@ public class MiscController {
     public String mostrarMensagemInicio(){
         return "paginaInicial";
     }
-    
+ 
     @GetMapping("/produtos")
-    public String mostrarCatalagoProdutos(){
+    public String mostrarCatalagoProdutos(Model model, String nome, String descricao, @RequestParam(defaultValue = "0") double valor) {
+        Produto produto = new Produto();       
+        produto.setNome(nome);        
+        produto.setDescricao(descricao);
+        produto.setValor(valor);     
+        model.addAttribute("produto",produto);
         return "catalago";
     }
     
@@ -53,5 +59,8 @@ public class MiscController {
         return "calculo";
 
     }
+    
+   
+    
     
 }
