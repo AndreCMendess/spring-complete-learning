@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping; 
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -59,6 +61,19 @@ public class MiscController {
         return "calculo";
 
     }
+    
+    @GetMapping("/cadastro")
+    public String mostrarCadastro(Model model){
+        model.addAttribute("produto",new Produto());
+        return "cadastroProduto";
+    }
+    
+    @PostMapping("/cadastro")
+    public String recebeCadastro(Model model, @ModelAttribute Produto produto){
+        model.addAttribute("produto",produto);
+        return "catalago";
+    }
+    
     
    
     
