@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> 
+    <head> 
+            <title>Catalago de Produtos</title> 
+    </head> 
+    <header th:insert="navbar.html :: nav">
+        
+    </header>
+    <body> 
+            <h1>Lista de Produtos</h1> 
+            <p>Esses sao todos so produtos atuais da loja</p>   
+            <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Status<th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produto : ${produtos}">
+                    <td th:text="${produto.id}"></td>
+                    <td th:text="${produto.descricao}"></td>
+                    <td>
+                        <span th:if="${produto.status}">A venda</span>
+                        <span th:unless="${produto.status}">Esgotado</span>
+                    </td>
+                    <!--  Usamos a condicional exibir apenas as produtos pem estoque
+                     <tr th:each="produto : ${produtos}" th:if="${produto.status}"> 
+                         
+                     </tr> --> 
+            </tbody>
+        </table>
+    </body> 
+</html> 

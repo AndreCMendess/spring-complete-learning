@@ -1,0 +1,15 @@
+<!DOCTYPE html> 
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> 
+    <head> 
+            <title>Produto</title> 
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+    </head> 
+    <body> 
+            <h1>Produto</h1> 
+            <p>Bem-vindo, <span th:text="${nome}"/>!</p> 
+            <br> 
+            <p>ID: <span th:text="${produto.id}" /></p> 
+            <p>Descrição: <span th:text="${produto.descricao}" /></p> 
+            <p>Status: <span th:text="${produto.completa}" /></p> 
+    </body> 
+</html> 

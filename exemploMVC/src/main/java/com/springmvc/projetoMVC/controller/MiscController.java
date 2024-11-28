@@ -46,7 +46,11 @@ public class MiscController {
     }
     
     @GetMapping("/calculo")
-    public String calcular(@RequestParam("valor1") int valor1, @RequestParam("valor2") int valor2, Model model) {
+    public String calcular(
+            @RequestParam(value="valor1" ,  required = false , defaultValue = "0") int valor1,
+            @RequestParam(value="valor2" ,  required = false , defaultValue = "0") int valor2,
+            Model model) {
+        
         double soma = valor1 + valor2;
         double subtracao = valor1 - valor2;
         double multiplicacao = valor1 * valor2;
@@ -58,6 +62,7 @@ public class MiscController {
         model.addAttribute("subtracao", subtracao);
         model.addAttribute("multiplicacao", multiplicacao);
         model.addAttribute("divisao", divisao);
+        
         return "calculo";
 
     }
