@@ -1,0 +1,31 @@
+<header th:fragment="header">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-universal-access"></i>
+               Casa Cultural
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav d-flex justify-content-center w-100">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/pagina-inicial}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/filmes}">Filmes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cadastrar-filme}">Cadastrar Filmes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/sobre}">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </div>
+</header>
