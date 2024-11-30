@@ -1,19 +1,34 @@
 
 package com.casa_cultural.casa_cultural.model;
 
+import java.util.List;
+
 
 public class Filme {
     private int id;
     private String titulo;
+    private String sinopse;
     private String genero;
     private String anoLancamento;
+    private List<Analise> analise;
 
-    public Filme(int id, String titulo, String genero, String anoLancamento) {
+    public Filme(int id, String titulo, String sinopse, String genero, String anoLancamento) {
         this.id = id;
         this.titulo = titulo;
+        this.sinopse = sinopse;
         this.genero = genero;
         this.anoLancamento = anoLancamento;
     }
+
+    public String getSinopse() {
+        return sinopse;
+    }
+
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
+    }
+
+    
 
     public Filme() {
     }
