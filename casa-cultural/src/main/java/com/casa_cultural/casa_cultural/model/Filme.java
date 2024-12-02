@@ -1,6 +1,7 @@
 
 package com.casa_cultural.casa_cultural.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +11,7 @@ public class Filme {
     private String sinopse;
     private String genero;
     private String anoLancamento;
-    private List<Analise> analise;
+    private List<Analise> analise = new ArrayList();
 
     public Filme(int id, String titulo, String sinopse, String genero, String anoLancamento) {
         this.id = id;
@@ -20,6 +21,15 @@ public class Filme {
         this.anoLancamento = anoLancamento;
     }
 
+    public List<Analise> getAnalise() {
+        return analise;
+    }
+
+    public void setAnalise(List<Analise> analise) {
+        this.analise = analise;
+    }
+
+    
     public String getSinopse() {
         return sinopse;
     }
