@@ -23,24 +23,14 @@
                         <tr>
                             <th scope="col">Nome do Filme</th>
                             <th scope="col">Classificação</th>
-                            <th scope="col">Saiba Mais</th>
+                            <th scope="col"> Saiba Mais </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr th:each="filme : ${filmes}">
                             <th scope="row" th:text="${filme.titulo}"></th>
-                            <td th:text="${analise.nota}"></td>
-                            <td>Saiba mais</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Homem apanha</th>
-                            <td>11</td>
-                            <td>Saiba mais</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Procurando o nemo</th>
-                             <td>7</td>
-                            <td>Saiba mais</td>
+                            <td th:text="${filme.mediaNota()}"></td>
+                            <td><a th:href="@{/filmes}"> Saiba Mais </a></td>
                         </tr>
                     </tbody>
                 </table>

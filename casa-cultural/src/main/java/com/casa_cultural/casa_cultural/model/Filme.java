@@ -26,9 +26,7 @@ public class Filme {
 
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
-    }
-
-    
+    } 
 
     public Filme() {
     }
@@ -65,5 +63,16 @@ public class Filme {
         this.anoLancamento = anoLancamento;
     }
     
+    public double mediaNota(){
+        double totalAnalise = 0;
+        double media = 0;
+        
+        for(int i=0; i<analise.size(); i++){
+            totalAnalise  += analise.get(i).getNota();
+            media = totalAnalise / analise.size();
+        }
+        
+        return media; 
+    }
     
 }

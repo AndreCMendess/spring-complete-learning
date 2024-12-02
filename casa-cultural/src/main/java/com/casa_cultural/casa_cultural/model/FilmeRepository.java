@@ -2,7 +2,9 @@ package com.casa_cultural.casa_cultural.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class FilmeRepository {
     private List<Filme> filmes = new ArrayList<>();
     private int idContador = 1;
