@@ -35,11 +35,48 @@
                             <td th:text="${filme.sinopse}"></td>
                             <td th:text="${filme.genero}"></td>
                             <td th:text="${filme.anoLancamento}"></td>
-                            <td th:each="analise : ${filme.analise}"  th:text="${analise.analise}"></td>
+                            <td>
+                                <ul class="list-unstyled">
+                                    <li th:each="analise : ${filme.analise}" th:text="${analise.analise}"></li>
+                                </ul>
+                            </td>
                             <td th:text="${filme.mediaNota()}"></td>
                         </tr>             
                     </tbody>
                 </table>
+            </div>
+            <div class="container">
+                <form id="form_analise"  th:action="@{/filmes}" method="post" th:object="${analise}">
+                        <div class="mb-3 col-md-6">
+                            <label for="filmes" class="form-label">Escolha o Filme</label>
+                            <select class="form-select" id="filmes" aria-label="Escolha um filme" th:field="${analise.filme.id}">       
+                                <th:block th:each="filme : ${filmes}">
+                                    <option th:value="${filme.id}" th:text="${filme.titulo}"></option>
+                                </th:block>
+                            </select>
+                        </div>       
+                        <div class="mb-3 col-md-6">
+                            <label for="txt_analise" class="form-label">Analise</label>                              
+                            <input type="text" id="txt_analise" class="form-control" th:field="*{analise}">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="numero" class="form-label">Escolha uma nota de 1 a 10</label>
+                            <select class="form-select" id="numero" aria-label="Escolha um número" th:field="*{nota}">
+                                <option selected value="0">Selecione um número</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <button id="submit_analise" type="submit" class="btn btn-info">Avaliar</button>
+                        </div>          
+                </form>
             </div>
         </main>          
         <footer th:replace="footer.html :: footer"></footer>

@@ -3,16 +3,24 @@ package com.casa_cultural.casa_cultural.controller;
 import com.casa_cultural.casa_cultural.model.Analise;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.model.FilmeRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Controller
 public class FilmeController {
     
     @Autowired
     FilmeRepository filmeRepository;
+    
+    private static final Logger logger = LoggerFactory.getLogger(FilmeController.class);
     
     @GetMapping("/pagina-inicial")
     public String paginaInicial(Model model){
@@ -22,7 +30,10 @@ public class FilmeController {
     
     @GetMapping("/filmes")
     public String paginaFilmes(Model model) {
-        Filme filme1 = new Filme(1, "O Senhor dos Anéis: A Sociedade do Anel", "A jornada de um hobbit para destruir um anel mágico e salvar o mundo.", "Aventura/Fantasia", "2001");
+        
+      
+        
+       /* Filme filme1 = new Filme(1, "O Senhor dos Anéis: A Sociedade do Anel", "A jornada de um hobbit para destruir um anel mágico e salvar o mundo.", "Aventura/Fantasia", "2001");
         Analise analise1 = new Analise(1, filme1, "Excelente! Uma das melhores adaptações de livro.", 5.0);
 
         Filme filme2 = new Filme(2, "Inception", "Um ladrão especializado em extrair segredos do subconsciente é dado uma tarefa impossível: implantar uma ideia na mente de alguém.", "Ficção Científica/Ação", "2010");
@@ -42,14 +53,44 @@ public class FilmeController {
         filmeRepository.cadastrarFilme(filme1);
         filmeRepository.cadastrarFilme(filme2);
         filmeRepository.cadastrarFilme(filme3);
-        filmeRepository.cadastrarFilme(filme4);
+        filmeRepository.cadastrarFilme(filme4);*/
+            List<Filme> filmes = filmeRepository.filmesCadastrados();
+        System.out.println("Filmes cadastrados: ");
+        for (Filme filme : filmes) {
+            System.out.println("ID: " + filme.getId() + ", Título: " + filme.getTitulo());
+        }
 
         model.addAttribute("filmes", filmeRepository.filmesCadastrados());
+        model.addAttribute("analise",new Analise());
         return "filmes";
     }
 
+    
+    @PostMapping("/filmes")
+    public String prepararAvaliacao(@ModelAttribute Analise analise, Model model) {
+     
+        filmeRepository.avaliarFilme(analise.getFilme().getId(), analise);
+        
+        model.addAttribute("filmes", filmeRepository.filmesCadastrados());
+        return "filmes";
+    }
+    
+    
+
+    
     @GetMapping("/cadastrar-filme")
-    public String cadastrarFilme(){
+    public String cadastrarFilme(Model model){
+        model.addAttribute("filme",new Filme());
         return "cadastrar-filme";
     }
+    
+    @PostMapping("/cadastrar-filme")
+    public String processarFormulario(@ModelAttribute Filme filme ,Model model){
+       filmeRepository.cadastrarFilme(filme);
+       model.addAttribute("filme",filme);
+       String mensagem = "Filme cadastrado com sucesso";
+       model.addAttribute("mensagem",mensagem);
+       return "cadastrar-filme";
+    }
+    
 }
