@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>Catalogo de Produtos</title> 
+</head> 
+<body> 
+     <h1>Meus Catalogo de Produtos</h1> 
+     <h2>Cadastro de Produto</h2> 
+     <form id="formCriarProduto"> 
+         <label for="descricao">Descrição:</label> 
+         <input type="text" id="descricao" name="descricao"> 
+         <button type="submit">Adicionar</button> 
+     </form> 
+     <h2>Produtos Cadastrados</h2> 
+     <table id="tabelaProdutos"> 
+     <thead> 
+         <tr> 
+         <th>ID</th> 
+         <th>Descrição</th> 
+         <th>Status</th> 
+         <th>Excluir</th> 
+         </tr> 
+     </thead> 
+     <tbody></tbody> 
+     </table> 
+      
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
+     <script src="script.js"></script> 
+ </body> 
+ </html> 
