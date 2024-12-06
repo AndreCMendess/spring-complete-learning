@@ -2,12 +2,17 @@ package com.api.funcionario.api_funcionario.controller;
 
 import com.api.funcionario.api_funcionario.model.Funcionario;
 import com.api.funcionario.api_funcionario.service.FuncionarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/funcionario")
@@ -28,12 +33,26 @@ public class FuncionarioController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Funcionario> addFuncionario(@RequestBody Funcionario funcionario){
+    public ResponseEntity<Funcionario> addFuncionario(@Valid @RequestBody Funcionario funcionario){
+        System.out.println("Requisição recebida: " + funcionario);
         var novoFuncionario = funcionarioService.criarFuncionario(funcionario);
         return new ResponseEntity<>(novoFuncionario,HttpStatus.CREATED);
     }
 
-    @PutMapping("/atualizar/{ìd}")
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String message = error.getDefaultMessage();
+            errors.put(fieldName, message);
+        });
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Funcionario> atualizarFuncionario(@PathVariable Integer id,@RequestBody Funcionario funcionario){
         var funcionarioAtualiado = funcionarioService.atualizarFuncionario(id,funcionario);
         return new ResponseEntity<>(funcionarioAtualiado,HttpStatus.OK);

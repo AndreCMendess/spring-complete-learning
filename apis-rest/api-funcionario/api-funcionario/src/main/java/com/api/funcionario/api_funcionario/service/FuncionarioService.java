@@ -1,6 +1,7 @@
 package com.api.funcionario.api_funcionario.service;
 
 
+import com.api.funcionario.api_funcionario.exception.ResourceNotFoundException;
 import com.api.funcionario.api_funcionario.model.Funcionario;
 import com.api.funcionario.api_funcionario.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class FuncionarioService  {
     }
 
     public Funcionario getFuncionarioId(Integer id){
-        Funcionario funcionario = funcionarioRepository.findById(id).orElse(null);
+        Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Funcionario nao encontrado id: " + id));
         return funcionario;
     }
 
