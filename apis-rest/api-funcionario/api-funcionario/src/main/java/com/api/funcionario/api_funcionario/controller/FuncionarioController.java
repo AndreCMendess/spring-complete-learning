@@ -64,4 +64,18 @@ public class FuncionarioController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping("/pesquisar-nome/{nome}")
+    public ResponseEntity<List> getPesquisarPorNomeFuncionario(@PathVariable String nome){
+        List<Funcionario> funcionarios = funcionarioService.getFuncionarioPorNome(nome);
+        return new ResponseEntity<>(funcionarios,HttpStatus.OK);
+    }
+
+    @GetMapping("/maior-salario")
+    public ResponseEntity<Funcionario> getMaiorSalario(){
+        Funcionario funcionario = funcionarioService.getMaiorSalario();
+        return new ResponseEntity<>(funcionario,HttpStatus.OK);
+    }
+
+
+
 }

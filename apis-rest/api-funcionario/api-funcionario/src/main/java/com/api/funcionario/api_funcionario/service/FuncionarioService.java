@@ -45,4 +45,12 @@ public class FuncionarioService  {
         Funcionario func = getFuncionarioId(id);
         funcionarioRepository.deleteById(id);
     }
+
+    public List<Funcionario> getFuncionarioPorNome(String nome){
+        return funcionarioRepository.findByNomeContaining(nome);
+    }
+
+    public Funcionario getMaiorSalario(){
+        return funcionarioRepository.findMaiorSalario();
+    }
 }
