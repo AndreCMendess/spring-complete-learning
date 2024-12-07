@@ -3,10 +3,10 @@ package com.api.funcionario.api_funcionario.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
-import org.hibernate.validator.constraints.br.CPF;
 
 @Data
 @ToString
@@ -20,7 +20,7 @@ public class Funcionario {
     private String nome;
     @NotBlank(message = "E-mail obrigatorio")
     private String email;
-    @CPF(message="CPF INVALIDO")
+    @Pattern(regexp = "^[0-9]{11}$", message = "CPF inválido")
     private String cpf;
     @NotBlank(message="Telefone obrigatório")
     private String telefone;
