@@ -27,6 +27,19 @@ public class AnaliseService {
        return analise;
     }
 
+    public Analise atualizarAnalise(Integer filmeId,Integer analiseId,Analise analiseAtualizada){
+        Analise analise = buscarAnalisePorId(analiseId);
+        Filme filme = filmeRepository.getReferenceById(filmeId);
+
+        if(filme.getAnalise().contains(analise)) {
+            analise.setAnalise(analiseAtualizada.getAnalise());
+            analise.setNota(analiseAtualizada.getNota());
+            return analise;
+        }
+        return null;
+
+    }
+
     public Analise buscarAnalisePorId(Integer analiseId){
         Analise analise = analiseRepository.findById(analiseId).orElse(null);
         return analise;
