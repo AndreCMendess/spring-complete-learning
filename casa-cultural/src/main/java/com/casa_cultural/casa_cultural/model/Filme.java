@@ -1,11 +1,14 @@
 
 package com.casa_cultural.casa_cultural.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class Filme {
+
     private int id;
     private String titulo;
     private String sinopse;
