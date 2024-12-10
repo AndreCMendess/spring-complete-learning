@@ -2,7 +2,7 @@ package com.casa_cultural.casa_cultural.controller;
 
 import com.casa_cultural.casa_cultural.model.Analise;
 import com.casa_cultural.casa_cultural.model.Filme;
-import com.casa_cultural.casa_cultural.model.FilmeRepository;
+import com.casa_cultural.casa_cultural.model.FilmeRepositoryy;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class FilmeController {
     
     @Autowired
-    FilmeRepository filmeRepository;
+    FilmeRepositoryy filmeRepository;
     
     private static final Logger logger = LoggerFactory.getLogger(FilmeController.class);
     

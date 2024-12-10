@@ -15,5 +15,5 @@ public class Analise {
     private Filme filme;
     private String analise;
     private double nota;
-    
+
 }

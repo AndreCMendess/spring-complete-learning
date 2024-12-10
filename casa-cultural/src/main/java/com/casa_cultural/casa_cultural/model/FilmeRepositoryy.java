@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FilmeRepository {
+public class FilmeRepositoryy {
     private List<Filme> filmes = new ArrayList<>();
     private int idContador = 0;
     
