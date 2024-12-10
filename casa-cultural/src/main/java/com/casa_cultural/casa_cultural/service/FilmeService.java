@@ -36,8 +36,13 @@ public class FilmeService {
         return filmeRepository.findAll();
     }
 
-    public void deletarFilme(Integer id){
-        Filme filme = getFilmePorId(id);
-        filmeRepository.deleteById(filme.getId());
+    public boolean deletarFilme(Integer id) {
+        if (filmeRepository.existsById(id)) {
+            filmeRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
+
+
 }

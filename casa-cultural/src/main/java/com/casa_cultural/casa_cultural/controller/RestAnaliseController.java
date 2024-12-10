@@ -1,7 +1,6 @@
 package com.casa_cultural.casa_cultural.controller;
 
 import com.casa_cultural.casa_cultural.model.Analise;
-import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.service.AnaliseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +31,8 @@ public class RestAnaliseController {
     }
 
     @DeleteMapping("/{filmeId}")
-    public boolean deletarAnalise(@PathVariable Filme filmeId,@PathVariable Integer analiseId){
-        return false;
+    public boolean deletarAnalise(@PathVariable Integer filmeId,@PathVariable Integer analiseId){
+        return analiseService.deletarAnalise(filmeId,analiseId);
     }
 
 }

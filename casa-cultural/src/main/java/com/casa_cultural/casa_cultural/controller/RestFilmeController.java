@@ -26,7 +26,7 @@ public class RestFilmeController {
     }
 
     @PostMapping
-    public Filme adicionarFiflme(Filme novoFilme) {
+    public Filme adicionarFiflme(@RequestBody Filme novoFilme) {
         return filmeService.adicionandoFilme(novoFilme);
     }
 
@@ -36,15 +36,9 @@ public class RestFilmeController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deletarFilme(@PathVariable int id) {
-        List<Filme> filmes = filmeService.getTodosFilmes();
-        for(Filme f : filmes){
-            if(f.getId() == id){
-                filmeService.deletarFilme(id);
-                return true;
-            }
-        }
-        return false;
+    public boolean  deletarFilme(@PathVariable int id) {
+        return filmeService.deletarFilme(id);
+
     }
 
 

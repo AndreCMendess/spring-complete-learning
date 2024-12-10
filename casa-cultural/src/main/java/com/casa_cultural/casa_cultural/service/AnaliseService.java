@@ -49,9 +49,18 @@ public class AnaliseService {
         return analiseRepository.findAll();
     }
 
-    public void deletarAnalise(Integer id){
-        Analise analise = buscarAnalisePorId(id);
-        analiseRepository.deleteById(analise.getId());
+    public boolean deletarAnalise(Integer filmeId , Integer analiseId){
+        Filme filme = filmeRepository.findById(filmeId).orElse(null);
+        Analise analise = buscarAnalisePorId(analiseId);
+
+        if(filme.getAnalise().contains(analise)){
+            filme.getAnalise().remove(analise);
+
+            filmeRepository.save(filme);
+            analiseRepository.deleteById(analise.getId());
+            return true;
+        }
+        return false;
     }
 
 
