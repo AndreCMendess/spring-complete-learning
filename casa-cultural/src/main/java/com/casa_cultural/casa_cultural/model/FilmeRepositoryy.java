@@ -1,8 +1,8 @@
 package com.casa_cultural.casa_cultural.model;
 
+import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class FilmeRepositoryy {
@@ -34,9 +34,9 @@ public class FilmeRepositoryy {
         }
 
         if (filme != null) {
-            List<Analise> analises = filme.getAnalise();
+            List<Analise> analises = filme.getAnalises();
             analises.add(analise);
-            filme.setAnalise(analises);
+            filme.setAnalises(analises);
         } else {
             System.out.println("Filme não encontrado para o ID: " + id);
         }

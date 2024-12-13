@@ -1,6 +1,7 @@
 
 package com.casa_cultural.casa_cultural.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="Analise")
+@Table(name="Filme")
 public class Filme {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +19,9 @@ public class Filme {
     private String sinopse;
     private String genero;
     private String anoLancamento;
-    @OneToMany(mappedBy = "filme" ,cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Analise> analise = new ArrayList();
+    @OneToMany(mappedBy = "filme" ,cascade = CascadeType.ALL, orphanRemoval = true ,fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Analise> analises = new ArrayList();
+
 
 }

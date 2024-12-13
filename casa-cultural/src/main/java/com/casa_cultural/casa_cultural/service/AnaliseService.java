@@ -20,24 +20,19 @@ public class AnaliseService {
     public Analise adicionarAnalise(Analise analise,Integer filmeId){
        analise.setId(null);
        Filme filme = filmeRepository.getReferenceById(filmeId);
-       filme.getAnalise().add(analise);
+       filme.getAnalises().add(analise);
        analise.setFilme(filme);
        analiseRepository.save(analise);
        filmeRepository.save(filme);
        return analise;
     }
 
-    public Analise atualizarAnalise(Integer filmeId,Integer analiseId,Analise analiseAtualizada){
+    public Analise atualizarAnalise(Integer analiseId,Analise analiseAtualizada){
         Analise analise = buscarAnalisePorId(analiseId);
-        Filme filme = filmeRepository.getReferenceById(filmeId);
-
-        if(filme.getAnalise().contains(analise)) {
-            analise.setAnalise(analiseAtualizada.getAnalise());
-            analise.setNota(analiseAtualizada.getNota());
-            return analise;
-        }
-        return null;
-
+        analise.setComentario(analiseAtualizada.getComentario());
+        analise.setNota(analiseAtualizada.getNota());
+        analiseRepository.save(analise);
+        return analise;
     }
 
     public Analise buscarAnalisePorId(Integer analiseId){
@@ -49,12 +44,16 @@ public class AnaliseService {
         return analiseRepository.findAll();
     }
 
+    public List<Analise> retornarAnalisePorIdFilme(Integer filmeId){
+        return analiseRepository.findByFilmeId(filmeId);
+    }
+
     public boolean deletarAnalise(Integer filmeId , Integer analiseId){
         Filme filme = filmeRepository.findById(filmeId).orElse(null);
         Analise analise = buscarAnalisePorId(analiseId);
 
-        if(filme.getAnalise().contains(analise)){
-            filme.getAnalise().remove(analise);
+        if(filme.getAnalises().contains(analise)){
+            filme.getAnalises().remove(analise);
 
             filmeRepository.save(filme);
             analiseRepository.deleteById(analise.getId());

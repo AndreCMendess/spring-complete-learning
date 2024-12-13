@@ -21,22 +21,22 @@ public class RestFilmeController {
     }
 
     @GetMapping("/{id}")
-    public Filme buscarFilmePorId(@PathVariable int id) {
+    public Filme buscarFilmePorId(@PathVariable Integer id) {
         return filmeService.getFilmePorId(id);
     }
 
-    @PostMapping
+    @PostMapping("/adicionar")
     public Filme adicionarFiflme(@RequestBody Filme novoFilme) {
         return filmeService.adicionandoFilme(novoFilme);
     }
 
-    @PutMapping("/{id}")
-    public Filme atualizarFilme(@PathVariable int id , @RequestBody Filme filmeAtualizado) {
+    @PutMapping("/filmes/{id}")
+    public Filme atualizarFilme(@PathVariable Integer id , @RequestBody Filme filmeAtualizado) {
         return filmeService.atualizarFilme(id,filmeAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public boolean  deletarFilme(@PathVariable int id) {
+    public boolean  deletarFilme(@PathVariable Integer id) {
         return filmeService.deletarFilme(id);
 
     }

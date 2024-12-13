@@ -1,5 +1,6 @@
 package com.casa_cultural.casa_cultural.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,8 +13,9 @@ public class Analise {
     private Integer id;
     @ManyToOne
     @JoinColumn(name ="filme_id")
+    @JsonBackReference
     private Filme filme;
-    private String analise;
+    private String comentario;
     private double nota;
 
 }

@@ -1,6 +1,7 @@
 package com.casa_cultural.casa_cultural.service;
 
 import com.casa_cultural.casa_cultural.model.Filme;
+import com.casa_cultural.casa_cultural.repository.AnaliseRepository;
 import com.casa_cultural.casa_cultural.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ public class FilmeService {
     @Autowired
     FilmeRepository filmeRepository;
 
+    @Autowired
+    AnaliseRepository analiseRepository;
+
     public Filme adicionandoFilme(Filme filme){
         filme.setId(null);
         filmeRepository.save(filme);
@@ -19,7 +23,7 @@ public class FilmeService {
     }
 
     public Filme atualizarFilme(Integer filmeId , Filme filmeAtualizado){
-        Filme filme = filmeRepository.getReferenceById(filmeId);
+        Filme filme = filmeRepository.findById(filmeId).orElse(null);
         filme.setTitulo(filmeAtualizado.getTitulo());
         filme.setSinopse(filmeAtualizado.getSinopse());
         filme.setGenero(filmeAtualizado.getGenero());
