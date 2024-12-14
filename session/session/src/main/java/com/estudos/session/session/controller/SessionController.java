@@ -25,10 +25,11 @@ public class SessionController {
     public String lerSessao(HttpServletRequest request, Model model){
         HttpSession sessao = request.getSession();
         String nome = "";
-        if(sessao != null && sessao.getAttribute("nome-usuario") != null)
+        if(sessao != null && sessao.getAttribute("nome-usuario") != null) {
             nome = (String) sessao.getAttribute("nome-usuario");
+        }
             model.addAttribute("mensagem", "Sessao[nome] = " + nome);
-             return "sessao";
+            return "sessao";
     }
 
 
