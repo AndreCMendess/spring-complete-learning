@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+   <form th:action="@{/autentica}" method="POST">
+     <p><input type="text" name="login" id="txtLogin" placeholder="Login" /></p>
+     <p><input type="password" name="senha" id="pswSenha" placeholder="Senha"/></p>
+     <input type="submit" value="Autenticar" />
+   </form>
+</body>
+</html>
