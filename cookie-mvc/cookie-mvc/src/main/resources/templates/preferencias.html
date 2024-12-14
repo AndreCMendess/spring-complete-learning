@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Site - Preferências</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h1>Informe suas preferências para o site</h1>
+<form th:action="@{/preferencias}" method="POST">
+    <p>
+        <label for="txtNome">Seu nome:</label>
+        <input type="text" name="nome" id="txtNome" required placeholder="Digite seu nome"/>
+    </p>
+    <p>
+        <label for="selEstilo">Seu esquema de cores favorito:</label>
+        <select name="estilo" id="selEstilo" required>
+            <option value="" disabled selected>Escolha uma opção</option>
+            <option value="claro">Tema Claro</option>
+            <option value="escuro">Tema Escuro</option>
+        </select>
+    </p>
+    <p>
+        <label for="selFontes">Seu esquema de fontes favorito:</label>
+        <select name="fonte" id="selFontes" required>
+            <option value="" disabled selected>Escolha uma opção</option>
+            <option value="new-roman">Times New Roman</option>
+            <option value="verdana">Verdana</option>
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="OK"/>
+    </p>
+</form>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Site - Página Inicial</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{/styles/}+${css}+'.css'" rel="stylesheet" type="text/css"/>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        color: #007BFF;
+    }
+    a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    p {
+        margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Olá, <span th:text="${nome}">Usuário</span>!</h1>
+</header>
+<main>
+  <p>Seja muito bem-vindo(a) ao seu site!</p>
+  <p>O estilo atual da página é <strong th:text="${css}">padrão</strong>.</p>
+  <p>O fonte atual da página é <strong th:text="${fonte}">padrão</strong>.</p>
+  <p>Você pode configurar suas preferências de exibição
+    <a th:href="@{/preferencias}">neste link</a>.
+  </p>
+</main>
+</body>
+</html>
