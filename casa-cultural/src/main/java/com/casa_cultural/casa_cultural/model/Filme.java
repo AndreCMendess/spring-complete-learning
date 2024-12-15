@@ -23,5 +23,19 @@ public class Filme {
     @JsonManagedReference
     private List<Analise> analises = new ArrayList();
 
+    public double calcularMedia(){
+
+        if(analises == null){
+            return 0.0;
+        }else{
+            return analises.stream()//Itera a Lista de analises
+                            .mapToDouble(Analise::getNota)//Obtem a nota de todas as analises
+                            .average()//Calcula a media das notas obtidas
+                    .orElse(0.0);//Retorna 0.0 se estiver vazio
+
+        }
+
+
+    }
 
 }
