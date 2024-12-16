@@ -27,10 +27,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="filme : ${listaFilmes}">
+                        <tr th:each="filme : ${listarFilmes}">
                             <th scope="row" th:text="${filme.titulo}"></th>
                             <td th:text="${filme.calcularMedia()}"></td>
-                            <td><a th:href="@{/filmes}"> Saiba Mais </a></td>
+                            <td><a th:href="@{/lista-filmes}"> Saiba Mais </a></td>
                         </tr>
                     </tbody>
                 </table>
