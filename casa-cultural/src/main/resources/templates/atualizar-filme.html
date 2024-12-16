@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Filme</title>
+    <link rel="stylesheet" href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<header th:replace="header.html :: header"></header>
+<div class="container mt-5">
+    <h1 class="text-center">Gerenciamento de Filmes</h1>
+    <hr>
+    <h2>Atualizar Filme</h2>
+    <form action="#" th:action="@{/atualizarFilmeForm/{id}(id=${filme.id})}" th:object="${filme}" method="POST">
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" th:field="*{titulo}" placeholder="Insira o título" class="form-control col-6">
+        </div>
+        <div class="form-group">
+            <label for="sinopse">Sinopse</label>
+            <textarea id="sinopse" th:field="*{sinopse}" placeholder="Insira a sinopse" class="form-control col-6"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="genero">Gênero</label>
+            <input type="text" id="genero" th:field="*{genero}" placeholder="Insira o gênero do filme" class="form-control col-6">
+        </div>
+        <div class="form-group">
+            <label for="anoLancamento">Ano de Lançamento</label>
+            <input type="date" id="anoLancamento" th:field="*{anoLancamento}" class="form-control col-6">
+        </div>
+        <input type="hidden" th:field="*{id}" />
+        <button type="submit" class="btn btn-info">Atualizar</button>
+    </form>
+    <hr>
+    <a th:href="@{/lista-filmes}" class="btn btn-secondary">Retornar</a>
+</div>
+<footer th:replace="footer.html :: footer"></footer>
+</body>
+</html>
