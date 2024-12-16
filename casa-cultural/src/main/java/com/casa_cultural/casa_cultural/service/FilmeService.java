@@ -1,5 +1,6 @@
 package com.casa_cultural.casa_cultural.service;
 
+import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.repository.AnaliseRepository;
 import com.casa_cultural.casa_cultural.repository.FilmeRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FilmeService {
@@ -48,5 +50,15 @@ public class FilmeService {
         return false;
     }
 
+    public List<FilmeDTO> getFilmesDTO(){
+        return filmeRepository.findAll().
+                stream().
+                map(  filme -> new FilmeDTO(
+                        filme.getId(),
+                        filme.getTitulo(),
+                        filme.calcularMedia()
+                ))
+                .collect(Collectors.toList());
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.casa_cultural.casa_cultural.controller;
 
+import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,14 @@ public class RestFilmeController {
         List<Filme> filmes = filmeService.getTodosFilmes();
         return new ResponseEntity<>(filmes, HttpStatus.OK);
     }
+
+    @GetMapping("/filmes-inicio")
+    public ResponseEntity<List<FilmeDTO>> getFilmesDTO(){
+        List<FilmeDTO> filmesDTO = filmeService.getFilmesDTO();
+        return new ResponseEntity<>(filmesDTO,HttpStatus.OK);
+    }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Filme> buscarFilmePorId(@PathVariable Integer id) {
@@ -47,6 +56,8 @@ public class RestFilmeController {
         return new ResponseEntity(HttpStatus.OK);
 
     }
+
+
 
 
 }
