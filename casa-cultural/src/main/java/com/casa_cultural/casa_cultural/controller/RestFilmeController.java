@@ -52,7 +52,7 @@ public class RestFilmeController {
         return new ResponseEntity<>(filmeAtualizado,HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity deletarFilme(@PathVariable Integer id) {
         filmeService.deletarFilme(id);
         return new ResponseEntity(HttpStatus.OK);

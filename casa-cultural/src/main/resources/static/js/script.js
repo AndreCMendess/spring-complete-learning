@@ -62,7 +62,28 @@ $(document).ready(function () {
                      let btnDeletar = $('<button>')
                         .addClass('btn btn-danger btn-sm me-2')
                         .html('<i class="fas fa-trash"></i>')
-                        .click(() => deletarFilme(filme.id));
+                        .data('id',filme.id)
+                        .click(function() {
+                             const idFilme = $(this).data('id');
+
+
+                             $.ajax({
+                                   url: `http://localhost:8080/filmes/${idFilme}`,
+                                   method: 'GET',
+                                   success: function(filme) {
+
+                                   $('#id_para_deletar').val(filme.id);
+                                   $('#confirmar_delete').modal('show');
+                             },
+                                   error: function(status,error ,xhr) {
+                                      console.log("Erro ao carregar os dados do filme.");
+                                      console.log("Status da requisição:", status);
+                                      console.log("Erro retornado:", error);
+                                      console.log("Resposta do servidor:", xhr.responseText);
+                                    }
+                             });
+
+                        });
 
                      let btnAtualizar  = $('<button>')
                         .addClass('btn btn-warning btn-sm')
@@ -223,6 +244,24 @@ $(document).ready(function () {
                 }
             });
     });
+
+    $('#btn_confirmar').click(function(){
+        const idFilme = $('#id_para_deletar').val();
+        $.ajax({
+            url: `http://localhost:8080/filmes/deletar/${idFilme}`,
+            method: 'DELETE',
+            success: function() {
+             $('#confirmar_delete').modal('hide');
+               alert('Filme excluído com sucesso!');
+               carregarFilmesComAnalises();
+            },
+            error: function() {
+              alert('Erro ao excluir o filme.');
+            }
+        });
+
+    });
+
 
 
 
