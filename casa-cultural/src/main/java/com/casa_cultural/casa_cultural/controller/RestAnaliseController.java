@@ -1,5 +1,6 @@
 package com.casa_cultural.casa_cultural.controller;
 
+import com.casa_cultural.casa_cultural.DTO.AnaliseDTO;
 import com.casa_cultural.casa_cultural.model.Analise;
 import com.casa_cultural.casa_cultural.service.AnaliseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,14 @@ public class RestAnaliseController {
     }
 
 
-    @PostMapping("/{filmeId}")
-    public ResponseEntity<Analise> adicionarAnalis(@PathVariable Integer filmeId, @RequestBody Analise analise){
-        Analise novaAnalise =  analiseService.adicionarAnalise(analise,filmeId);
-        return new ResponseEntity<>(novaAnalise,HttpStatus.OK);
+    @PostMapping("/analise")
+    public ResponseEntity<AnaliseDTO> adicionarAnalis(@RequestBody AnaliseDTO analiseDTO){
+        Analise analise = analiseService.adicionarAnalise(analiseDTO);
+        AnaliseDTO resposta = new AnaliseDTO();
+        resposta.setComentario(analise.getComentario());
+        resposta.setNota(analise.getNota());
+
+        return new ResponseEntity<>(resposta,HttpStatus.OK);
     }
 
     @PutMapping("/{analiseId}")

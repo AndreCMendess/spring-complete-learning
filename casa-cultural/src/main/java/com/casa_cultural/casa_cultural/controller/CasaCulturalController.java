@@ -38,7 +38,7 @@ public class CasaCulturalController {
         return "filmes";
     }
 
-    @PostMapping("/lista-filmes")
+    /*@PostMapping("/lista-filmes")
     public String adicionarAnalise(@ModelAttribute("analise") Analise analise, BindingResult result){
         if(result.hasErrors()){
             return "filmes";
@@ -46,12 +46,12 @@ public class CasaCulturalController {
 
 
         if(analise.getId() == null){
-            analiseService.adicionarAnalise(analise,analise.getFilme().getId());
+            analiseService.adicionarAnalise(analiseDTO,analise.getFilme().getId());
         }else{
             analiseService.atualizarAnalise(analise.getId(),analise);
         }
         return "redirect:/";
-    }
+    }*/
 
 
     @GetMapping("/deletarFilme/{id}")

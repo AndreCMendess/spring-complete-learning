@@ -1,5 +1,7 @@
 package com.casa_cultural.casa_cultural.service;
 
+import com.casa_cultural.casa_cultural.DTO.AnaliseDTO;
+import com.casa_cultural.casa_cultural.DTO.FilmeComAnaliseDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.repository.AnaliseRepository;
@@ -59,6 +61,33 @@ public class FilmeService {
                         filme.calcularMedia()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public List<FilmeComAnaliseDTO> getFilmesComAnaliseDTO(){
+        List<Filme> filmes = filmeRepository.findAll();
+        return filmes.stream()
+                .map(filme -> {
+                    List<AnaliseDTO> analiseDTO = filme.getAnalises()
+                            .stream()
+                            .map(analise -> new AnaliseDTO(analise.getId(),analise.getComentario(), analise.getNota()))
+                            .collect(Collectors.toList());
+
+                    Double mediaNota = analiseDTO.stream()
+                            .mapToDouble(AnaliseDTO::getNota)
+                            .average()
+                            .orElse(0.0);
+
+                    return new FilmeComAnaliseDTO(
+                            filme.getId(),
+                            filme.getTitulo(),
+                            filme.getSinopse(),
+                            filme.getGenero(),
+                            filme.getAnoLancamento(),
+                            analiseDTO,
+                            mediaNota
+
+                    );
+                }).collect(Collectors.toList());
     }
 
 }

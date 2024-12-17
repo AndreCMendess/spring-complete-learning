@@ -1,5 +1,6 @@
 package com.casa_cultural.casa_cultural.service;
 
+import com.casa_cultural.casa_cultural.DTO.AnaliseDTO;
 import com.casa_cultural.casa_cultural.model.Analise;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.repository.AnaliseRepository;
@@ -17,13 +18,15 @@ public class AnaliseService {
     @Autowired
     FilmeRepository filmeRepository;
 
-    public Analise adicionarAnalise(Analise analise,Integer filmeId){
-       analise.setId(null);
-       Filme filme = filmeRepository.getReferenceById(filmeId);
-       filme.getAnalises().add(analise);
+    public Analise adicionarAnalise(AnaliseDTO analiseDTO){
+       Filme filme = filmeRepository.findById(analiseDTO.getFilmeId()).orElse(null);
+       Analise analise = new Analise();
+       analise.setComentario(analiseDTO.getComentario());
+       analise.setNota(analiseDTO.getNota());
        analise.setFilme(filme);
+
+       filme.getAnalises().add(analise);
        analiseRepository.save(analise);
-       filmeRepository.save(filme);
        return analise;
     }
 
