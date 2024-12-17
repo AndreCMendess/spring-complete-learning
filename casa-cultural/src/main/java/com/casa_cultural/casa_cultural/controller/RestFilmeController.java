@@ -2,6 +2,7 @@ package com.casa_cultural.casa_cultural.controller;
 
 import com.casa_cultural.casa_cultural.DTO.FilmeComAnaliseDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
+import com.casa_cultural.casa_cultural.DTO.FilmeMinDTO;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class RestFilmeController {
     }
 
     @GetMapping("/tabela-inicio")
-    public ResponseEntity<List<FilmeDTO>> getFilmesDTO(){
-        List<FilmeDTO> filmesDTO = filmeService.getFilmesDTO();
+    public ResponseEntity<List<FilmeMinDTO>> getFilmesDTO(){
+        List<FilmeMinDTO> filmesDTO = filmeService.getFilmesDTO();
         return new ResponseEntity<>(filmesDTO,HttpStatus.OK);
     }
 
@@ -40,15 +41,15 @@ public class RestFilmeController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Filme> adicionarFilme(@RequestBody Filme filme) {
-        var novoFilme = filmeService.adicionandoFilme(filme);
-        return new ResponseEntity<>(novoFilme,HttpStatus.OK);
+    public ResponseEntity<FilmeDTO> adicionarFilme(@RequestBody FilmeDTO filmeDTO) {
+        FilmeDTO novoFIlme = filmeService.adicionandoFilme(filmeDTO);
+        return new ResponseEntity<>(novoFIlme, HttpStatus.CREATED);
     }
 
     @PutMapping("/filmes/{id}")
-    public ResponseEntity<Filme> atualizarFilme(@PathVariable Integer id , @RequestBody Filme filme) {
+    public ResponseEntity<FilmeDTO> atualizarFilme(@PathVariable Integer id , @RequestBody FilmeDTO filme) {
         var filmeAtualizado = filmeService.atualizarFilme(id,filme);
-        return new ResponseEntity<>(filmeAtualizado,HttpStatus.OK);
+        return new ResponseEntity<>(filmeAtualizado,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

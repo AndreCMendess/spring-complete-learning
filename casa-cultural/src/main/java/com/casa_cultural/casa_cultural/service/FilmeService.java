@@ -3,6 +3,7 @@ package com.casa_cultural.casa_cultural.service;
 import com.casa_cultural.casa_cultural.DTO.AnaliseDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeComAnaliseDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
+import com.casa_cultural.casa_cultural.DTO.FilmeMinDTO;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.repository.AnaliseRepository;
 import com.casa_cultural.casa_cultural.repository.FilmeRepository;
@@ -20,20 +21,28 @@ public class FilmeService {
     @Autowired
     AnaliseRepository analiseRepository;
 
-    public Filme adicionandoFilme(Filme filme){
-        filme.setId(null);
-        filmeRepository.save(filme);
-        return filme;
+    public FilmeDTO adicionandoFilme(FilmeDTO filmeDTO){
+
+        Filme filme = new Filme();
+
+        filme.setTitulo(filmeDTO.getTitulo());
+        filme.setSinopse(filmeDTO.getSinopse());
+        filme.setGenero(filmeDTO.getGenero());
+        filme.setAnoLancamento(filmeDTO.getAnoLancamento());
+
+        Filme filmeSalvo = filmeRepository.save(filme);
+
+        return new FilmeDTO(filmeSalvo);
     }
 
-    public Filme atualizarFilme(Integer filmeId , Filme filmeAtualizado){
+    public FilmeDTO atualizarFilme(Integer filmeId , FilmeDTO filmeAtualizado){
         Filme filme = filmeRepository.findById(filmeId).orElse(null);
         filme.setTitulo(filmeAtualizado.getTitulo());
         filme.setSinopse(filmeAtualizado.getSinopse());
         filme.setGenero(filmeAtualizado.getGenero());
         filme.setAnoLancamento(filmeAtualizado.getAnoLancamento());
         filmeRepository.save(filme);
-        return filme;
+        return new FilmeDTO(filme);
     }
 
     public Filme getFilmePorId(Integer id){
@@ -52,10 +61,10 @@ public class FilmeService {
         return false;
     }
 
-    public List<FilmeDTO> getFilmesDTO(){
+    public List<FilmeMinDTO> getFilmesDTO(){
         return filmeRepository.findAll().
                 stream().
-                map(  filme -> new FilmeDTO(
+                map(  filme -> new FilmeMinDTO(
                         filme.getId(),
                         filme.getTitulo(),
                         filme.calcularMedia()

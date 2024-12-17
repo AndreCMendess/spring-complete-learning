@@ -1,5 +1,6 @@
 package com.casa_cultural.casa_cultural.controller;
 
+import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
 import com.casa_cultural.casa_cultural.model.Analise;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.service.AnaliseService;
@@ -38,7 +39,7 @@ public class CasaCulturalController {
         return "filmes";
     }
 
-    /*@PostMapping("/lista-filmes")
+   /* @PostMapping("/lista-filmes")
     public String adicionarAnalise(@ModelAttribute("analise") Analise analise, BindingResult result){
         if(result.hasErrors()){
             return "filmes";
@@ -74,7 +75,7 @@ public class CasaCulturalController {
 
 
     @PostMapping("/cadastrar-filme")
-    public String adicionarFilme(@ModelAttribute("filme") Filme filme, BindingResult result){
+    public String adicionarFilme(@ModelAttribute("filme") FilmeDTO filme, BindingResult result){
         if(result.hasErrors()){
             return "cadastrar-filme";
         }
@@ -96,7 +97,7 @@ public class CasaCulturalController {
     }
 
     @PostMapping("/atualizarFilmeForm/{id}")
-    public String atualizarFilme(@PathVariable(value="id") Integer id, @ModelAttribute Filme filme, BindingResult result){
+    public String atualizarFilme(@PathVariable(value="id") Integer id, @ModelAttribute FilmeDTO filme, BindingResult result){
         if(result.hasErrors()) {
             return "atualizar-filme";
         }

@@ -84,7 +84,37 @@ $(document).ready(function () {
     }
 
     function cadastrarFilme() {
+        $('#form_cadastro_filme').submit(function(e) {
+              e.preventDefault();
 
+              let filme = {
+                          titulo: $('#titulo').val(),
+                          sinopse: $('#sinopse').val(),
+                          genero: $('#genero').val(),
+                          anoLancamento: $('#ano_Lancamento').val()
+              };
+
+
+
+              $.ajax({
+                url: 'http://localhost:8080/filmes/adicionar',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(filme),
+                success: function(response) {
+                    $('#mensagem').text('Filme criado com sucesso!').show();
+                    $('#form_cadastro_filme')[0].reset();
+                    carregarFilmesComAnalises();
+                },
+                error: function(xhr,status, error) {
+                    alert('Erro ao salvar o filme.');
+                      console.log('Erro na requisição: ', error);
+                      console.log('Status: ', status);
+                      console.log('Resposta do servidor: ', xhr.responseText);
+                }
+              });
+
+        });
     }
 
     $('#btn_salvar_analise').click(function () {
@@ -116,6 +146,7 @@ $(document).ready(function () {
                 },
                 error: function () {
                     alert('Erro ao salvar a análise.');
+
                 }
             });
     });
@@ -123,5 +154,6 @@ $(document).ready(function () {
 
      carregarFilmes();
      carregarFilmesComAnalises();
+     cadastrarFilme();
 
 });

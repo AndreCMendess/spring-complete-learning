@@ -1,14 +1,25 @@
 package com.casa_cultural.casa_cultural.DTO;
 
+import com.casa_cultural.casa_cultural.model.Filme;
+
+
 public class FilmeDTO {
+
     private Integer id;
     private String titulo;
-    private double mediaNota;
+    private String sinopse;
+    private String genero;
+    private String anoLancamento;
 
-    public FilmeDTO(Integer id, String titulo,double mediaNota) {
-        this.id = id;
-        this.mediaNota = mediaNota;
-        this.titulo = titulo;
+    public FilmeDTO(Filme filme) {
+        this.id = filme.getId();
+        this.titulo = filme.getTitulo();
+        this.sinopse = filme.getSinopse();
+        this.genero = filme.getGenero();
+        this.anoLancamento = filme.getAnoLancamento();
+    }
+
+    public FilmeDTO() {
     }
 
     public Integer getId() {
@@ -27,11 +38,27 @@ public class FilmeDTO {
         this.titulo = titulo;
     }
 
-    public double getMediaNota() {
-        return mediaNota;
+    public String getSinopse() {
+        return sinopse;
     }
 
-    public void setMediaNota(double mediaNota) {
-        this.mediaNota = mediaNota;
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getAnoLancamento() {
+        return anoLancamento;
+    }
+
+    public void setAnoLancamento(String anoLancamento) {
+        this.anoLancamento = anoLancamento;
     }
 }
