@@ -67,6 +67,43 @@
                         </div>          
                 </form>
             </div>
+
+            <div class="modal fade" id="modal_editar_filme" tabindex="-1" aria-labelledby="modalEditarFilmeLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEditarFilmeLabel">Atualizar Filme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form_atualizar_filme">
+                                <input type="hidden" id="id">
+                                <div class="mb-3">
+                                    <label for="titulo" class="form-label">Título</label>
+                                    <input type="text" id="titulo" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sinopse" class="form-label">Sinopse</label>
+                                    <textarea class="form-control" id="sinopse" rows="4"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="genero" class="form-label">Gênero</label>
+                                    <input type="text" id="genero" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ano_lancamento" class="form-label">Data de Lançamento</label>
+                                    <input type="date" id="ano_lancamento" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-info">Atualizar</button>
+                            </form>
+                            <div id="alert_message" class="alert alert-success alert-dismissible fade show mt-3" role="alert" style="display:none;">
+                                <strong>Sucesso!</strong> O filme foi atualizado com sucesso.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>          
         <footer th:replace="footer.html :: footer"></footer>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

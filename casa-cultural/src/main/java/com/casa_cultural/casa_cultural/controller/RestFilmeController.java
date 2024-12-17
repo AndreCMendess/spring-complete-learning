@@ -46,9 +46,9 @@ public class RestFilmeController {
         return new ResponseEntity<>(novoFIlme, HttpStatus.CREATED);
     }
 
-    @PutMapping("/filmes/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<FilmeDTO> atualizarFilme(@PathVariable Integer id , @RequestBody FilmeDTO filme) {
-        var filmeAtualizado = filmeService.atualizarFilme(id,filme);
+        FilmeDTO filmeAtualizado = filmeService.atualizarFilme(id,filme);
         return new ResponseEntity<>(filmeAtualizado,HttpStatus.CREATED);
     }
 

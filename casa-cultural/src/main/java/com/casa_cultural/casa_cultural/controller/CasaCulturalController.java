@@ -89,14 +89,13 @@ public class CasaCulturalController {
         return "redirect:/";
     }
 
-    @GetMapping("/atualizarFilmeForm/{id}")
-    public String atualizarFIlme(@PathVariable(value="id") Integer id,Model model){
+    /*@GetMapping("/atualizarFilmeForm/{id}")
+    public String atualizarFIlme(@PathVariable(value="id") Integer id){
         Filme filme = filmeService.getFilmePorId(id);
-        model.addAttribute("filme",filme);
         return "atualizar-filme";
-    }
+    }*/
 
-    @PostMapping("/atualizarFilmeForm/{id}")
+   /*@PostMapping("/atualizarFilmeForm/{id}")
     public String atualizarFilme(@PathVariable(value="id") Integer id, @ModelAttribute FilmeDTO filme, BindingResult result){
         if(result.hasErrors()) {
             return "atualizar-filme";
@@ -105,7 +104,7 @@ public class CasaCulturalController {
         filme.setId(id);
         filmeService.atualizarFilme(id, filme);
         return "redirect:/lista-filmes";
-    }
+    }*/
 
 
 }

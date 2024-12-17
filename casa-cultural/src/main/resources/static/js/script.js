@@ -28,7 +28,7 @@ $(document).ready(function () {
                 });
             },
             error: function() {
-                alert('Não foi possível carregar as tarefas da API.');
+                alert('Não foi possível carregar os filmes  da API.');
             }
         });
     };
@@ -41,6 +41,7 @@ $(document).ready(function () {
                 $('#tabelaFilmes tbody').empty();
 
                 data.forEach(filme => {
+
                     let linha = $('<tr>')
                     .append($('<td>').text(filme.titulo))
                     .append($('<td>').text(filme.sinopse))
@@ -60,15 +61,40 @@ $(document).ready(function () {
                      let operacoes = $('<td>');
                      let btnDeletar = $('<button>')
                         .addClass('btn btn-danger btn-sm me-2')
-                        .html('<i class="fas fa-trash"></i>"')
+                        .html('<i class="fas fa-trash"></i>')
                         .click(() => deletarFilme(filme.id));
 
                      let btnAtualizar  = $('<button>')
                         .addClass('btn btn-warning btn-sm')
                         .html('<i class="fas fa-edit"></i>')
-                        .click(() => atualizarFilme(filme.id));
+                        .data('id', filme.id)
+                        .click(function (filme) {
+                              const idFilme = $(this).data('id');
+                               $.ajax({
+                                        url: `http://localhost:8080/filmes/${idFilme}`,
+                                        method: 'GET',
+                                        success: function(filme) {
 
-                        operacoes.append(btnDeletar).append(btnAtualizar);
+                                            $('#id').val(filme.id);
+                                            $('#titulo').val(filme.titulo);
+                                            $('#sinopse').val(filme.sinopse);
+                                            $('#genero').val(filme.genero);
+                                            $('#anoLancamento').val(filme.anoLancamento);
+
+                                          $('form_atualizar_filme').data('id',filme.id);
+                                          $('#modal_editar_filme').modal('show');
+                                          $('#alert_message').hide();
+                                        },
+                                        error: function() {
+                                        console.log("ID do filme extraído da URL:", idFilme);
+                                            alert('Erro ao carregar os dados do filme.');
+                                        }
+                               });
+
+                        });
+
+
+                     operacoes.append(btnDeletar).append(btnAtualizar);
 
                      linha.append(operacoes);
 
@@ -77,8 +103,12 @@ $(document).ready(function () {
 
 
             },
-            error: function() {
+            error: function(xhr,status, error) {
                alert('Erro ao carregar os filmes com análises.');
+               console.error("Erro ao carregar os dados do filme com ID:", idFilme);
+               console.log('Erro na requisição: ', error);
+               console.log('Status: ', status);
+               console.log('Resposta do servidor: ', xhr.responseText);
             }
         });
     }
@@ -107,15 +137,58 @@ $(document).ready(function () {
                     carregarFilmesComAnalises();
                 },
                 error: function(xhr,status, error) {
-                    alert('Erro ao salvar o filme.');
-                      console.log('Erro na requisição: ', error);
-                      console.log('Status: ', status);
-                      console.log('Resposta do servidor: ', xhr.responseText);
+                     console.log('Erro na requisição: ', error);
+                     console.log('Status: ', status);
+                     console.log('Resposta do servidor: ', xhr.responseText);
                 }
               });
 
         });
+    };
+
+    function atualizarFilme(id) {
+
+        let filme = {
+                 id: $('#id').val(),
+                 titulo: $('#titulo').val(),
+                 sinopse: $('#sinopse').val(),
+                 genero: $('#genero').val(),
+                 anoLancamento: $('#ano_lancamento').val()
+        };
+
+        $.ajax({
+                url: 'http://localhost:8080/filmes/atualizar/' + id,
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(filme),
+                success: function(response) {
+
+                    $('#alert_message').show();
+                    carregarFilmesComAnalises();
+                    $('#model_editar_filme')[0].reset();
+
+                },
+                error: function(xhr,status, error) {
+                    alert('Erro ao atualizar o filme.');
+                    console.log('Erro na requisição: ', error);
+                    console.log('Status: ', status);
+                    console.log('Resposta do servidor: ', xhr.responseText);
+                }
+        });
     }
+
+
+
+
+
+      $('#form_atualizar_filme').submit(function(e) {
+              e.preventDefault();
+              let filmeId = $('#id').val();
+              console.log("ID do filme para atualizar:", filmeId);
+              atualizarFilme(filmeId);
+      });
+
+
 
     $('#btn_salvar_analise').click(function () {
         let filmeId = $('#filmeSelecionado').val();
@@ -152,8 +225,10 @@ $(document).ready(function () {
     });
 
 
+
      carregarFilmes();
      carregarFilmesComAnalises();
      cadastrarFilme();
+
 
 });
