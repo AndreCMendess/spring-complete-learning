@@ -71,9 +71,13 @@ $(document).ready(function () {
                                    url: `http://localhost:8080/filmes/${idFilme}`,
                                    method: 'GET',
                                    success: function(filme) {
+                                     $('#modal-title').show();
+                                     $('#modal-body').show();
+                                     $('#modal-footer').show();
 
-                                   $('#id_para_deletar').val(filme.id);
-                                   $('#confirmar_delete').modal('show');
+                                     $('#delete_message').hide();
+                                     $('#id_para_deletar').val(filme.id);
+                                     $('#confirmar_delete').modal('show');
                              },
                                    error: function(status,error ,xhr) {
                                       console.log("Erro ao carregar os dados do filme.");
@@ -134,38 +138,6 @@ $(document).ready(function () {
         });
     }
 
-    function cadastrarFilme() {
-        $('#form_cadastro_filme').submit(function(e) {
-              e.preventDefault();
-
-              let filme = {
-                          titulo: $('#titulo').val(),
-                          sinopse: $('#sinopse').val(),
-                          genero: $('#genero').val(),
-                          anoLancamento: $('#ano_Lancamento').val()
-              };
-
-
-
-              $.ajax({
-                url: 'http://localhost:8080/filmes/adicionar',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(filme),
-                success: function(response) {
-                    $('#mensagem').text('Filme criado com sucesso!').show();
-                    $('#form_cadastro_filme')[0].reset();
-                    carregarFilmesComAnalises();
-                },
-                error: function(xhr,status, error) {
-                     console.log('Erro na requisição: ', error);
-                     console.log('Status: ', status);
-                     console.log('Resposta do servidor: ', xhr.responseText);
-                }
-              });
-
-        });
-    };
 
     function atualizarFilme(id) {
 
@@ -251,9 +223,17 @@ $(document).ready(function () {
             url: `http://localhost:8080/filmes/deletar/${idFilme}`,
             method: 'DELETE',
             success: function() {
-             $('#confirmar_delete').modal('hide');
-               alert('Filme excluído com sucesso!');
-               carregarFilmesComAnalises();
+              $('#modal-title').hide();
+              $('#modal-body').hide();
+              $('#modal-footer').hide();
+
+              $('#delete_message').show();
+
+              carregarFilmesComAnalises();
+
+              setTimeout(function() {
+                    $('#modal_exemplo').modal('hide');
+                  }, 2000);
             },
             error: function() {
               alert('Erro ao excluir o filme.');
@@ -262,12 +242,44 @@ $(document).ready(function () {
 
     });
 
+    $('#btn_criar_filme').on('click',function () {
+        $('#modal_criar_filme').modal('show');
+    });
 
+     $('#form_criar_filme').submit(function (e) {
+       e.preventDefault();
+
+         let filme = {
+                             titulo: $('#titulo_filme').val(),
+                             sinopse: $('#sinopse_filme').val(),
+                             genero: $('#genero_filme').val(),
+                             anoLancamento: $('#ano_lancamento_filme').val()
+          };
+
+
+
+         console.log(filme);
+         $.ajax({
+                       url: 'http://localhost:8080/filmes/adicionar',
+                       method: 'POST',
+                       contentType: 'application/json',
+                       data: JSON.stringify(filme),
+                       success: function(response) {
+                           $('#sucess_message').text('Filme criado com sucesso!').show();
+                           $('#form_criar_filme')[0].reset();
+                           carregarFilmesComAnalises();
+                       },
+                       error: function(xhr,status, error) {
+                            console.log('Erro na requisição: ', error);
+                            console.log('Status: ', status);
+                            console.log('Resposta do servidor: ', xhr.responseText);
+                       }
+                     });
+     })
 
 
      carregarFilmes();
      carregarFilmesComAnalises();
-     cadastrarFilme();
 
 
 });

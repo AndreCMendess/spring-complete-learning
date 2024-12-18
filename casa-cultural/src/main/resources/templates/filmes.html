@@ -19,7 +19,9 @@
                 </div>
             </div>      
             <div class="container">
-
+                <button id="btn_criar_filme" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Criar Filme
+                </button>
                 <table class="table" id="tabelaFilmes">
                     <thead>
                         <tr>
@@ -108,17 +110,55 @@
             <div class="modal fade" id="confirmar_delete" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" id="modal-title">
                             <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" id="modal-body">
                             <p id="confirmMessage">Você tem certeza que deseja realizar esta ação?</p>
                             <input type="hidden" id="id_para_deletar">
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer" id="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_cancelar">Não</button>
                             <button type="button" class="btn btn-primary" id="btn_confirmar">Sim</button>
+                        </div>
+                        <div id="delete_message" class="alert alert-success alert-dismissible fade show mt-3" role="alert" style="display:none;">
+                            <strong>Sucesso!</strong> O filme foi deletado com sucesso.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal  mt-4" id="modal_criar_filme" tabindex="-1" aria-labelledby="modalCriarFilmeLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCriarFilmeLabel">Criar Novo Filme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form_criar_filme">
+                                <div class="mb-3">
+                                    <label for="titulo" class="form-label">Título</label>
+                                    <input type="text" id="titulo_filme" class="form-control" placeholder="Título do Filme" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sinopse" class="form-label">Sinopse</label>
+                                    <textarea id="sinopse_filme" class="form-control" rows="3" placeholder="Descrição do Filme" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="genero" class="form-label">Gênero</label>
+                                    <input type="text" id="genero_filme" class="form-control" placeholder="Ação, Drama, etc." required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ano_lancamento" class="form-label">Ano de Lançamento</label>
+                                    <input type="date" id="ano_lancamento_filme" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                <div id="sucess_message" class="alert alert-success alert-dismissible fade show mt-3" role="alert" style="display:none;">
+                                    <strong>Sucesso!</strong> O filme foi criado com sucesso.
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
