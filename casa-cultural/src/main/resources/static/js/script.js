@@ -277,6 +277,41 @@ $(document).ready(function () {
                      });
      })
 
+     $.get('/site/preferencias', function (data){
+        console.log(data);
+        var temaAtual = data === 'escuro' ? 'escuro' : 'claro';
+        $('#tema_estilo').attr('href','/css/' + temaAtual +'.css');
+     });
+
+     $('#btn_tema').click(function () {
+
+        const temaAtual = $('#tema_estilo').attr('href').includes('claro') ? 'claro' : 'escuro';
+
+        const novoTema = temaAtual === 'claro' ? 'escuro' : 'claro';
+
+        $.ajax({
+            url:'/site/preferencias',
+            method:'POST',
+            contentType:'application/json',
+            data: JSON.stringify({ estilo: novoTema}),
+            success: function () {
+                if(novoTema === 'escuro'){
+                    $('nav').removeClass('bg-info').addClass('bg-dark text-white');
+                }else{
+                    $('nav').removeClass('bg-dark text-white').addClass('bg-info text-dark');
+                }
+                $('#tema_estilo').attr('href','/css/' + novoTema +'.css');
+                console.log(`Tema alterado: ${novoTema}`);
+                    console.log('Tema alterado para: ' + novoTema);
+            },
+            error: function (erroHttp) {
+              console.error('Erro ao alterar o tema:', erroHttp.responseText);
+            }
+        });
+     });
+
+
+
 
      carregarFilmes();
      carregarFilmesComAnalises();
