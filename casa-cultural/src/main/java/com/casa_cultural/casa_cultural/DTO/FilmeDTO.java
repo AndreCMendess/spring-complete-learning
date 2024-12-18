@@ -1,13 +1,17 @@
 package com.casa_cultural.casa_cultural.DTO;
 
 import com.casa_cultural.casa_cultural.model.Filme;
+import jakarta.validation.constraints.NotBlank;
 
 
 public class FilmeDTO {
 
     private Integer id;
+    @NotBlank(message="Titulo obrigatório")
     private String titulo;
+    @NotBlank(message="Sinopse obrigatório")
     private String sinopse;
+    @NotBlank(message="Genero obrigatório")
     private String genero;
     private String anoLancamento;
 

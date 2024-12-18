@@ -5,6 +5,7 @@ import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeMinDTO;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.service.FilmeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class RestFilmeController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<FilmeDTO> adicionarFilme(@RequestBody FilmeDTO filmeDTO) {
+    public ResponseEntity<FilmeDTO> adicionarFilme(@Valid @RequestBody FilmeDTO filmeDTO) {
         FilmeDTO novoFIlme = filmeService.adicionandoFilme(filmeDTO);
         return new ResponseEntity<>(novoFIlme, HttpStatus.CREATED);
     }

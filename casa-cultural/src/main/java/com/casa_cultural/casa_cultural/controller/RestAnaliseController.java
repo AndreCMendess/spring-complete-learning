@@ -3,6 +3,7 @@ package com.casa_cultural.casa_cultural.controller;
 import com.casa_cultural.casa_cultural.DTO.AnaliseDTO;
 import com.casa_cultural.casa_cultural.model.Analise;
 import com.casa_cultural.casa_cultural.service.AnaliseService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class RestAnaliseController {
 
 
     @PostMapping("/analise")
-    public ResponseEntity<AnaliseDTO> adicionarAnalis(@RequestBody AnaliseDTO analiseDTO){
+    public ResponseEntity<AnaliseDTO> adicionarAnalis(@Valid @RequestBody AnaliseDTO analiseDTO){
         Analise analise = analiseService.adicionarAnalise(analiseDTO);
         AnaliseDTO resposta = new AnaliseDTO();
         resposta.setComentario(analise.getComentario());

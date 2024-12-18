@@ -4,6 +4,7 @@ import com.casa_cultural.casa_cultural.DTO.AnaliseDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeComAnaliseDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeDTO;
 import com.casa_cultural.casa_cultural.DTO.FilmeMinDTO;
+import com.casa_cultural.casa_cultural.exception.ResourceNotFoundException;
 import com.casa_cultural.casa_cultural.model.Filme;
 import com.casa_cultural.casa_cultural.repository.AnaliseRepository;
 import com.casa_cultural.casa_cultural.repository.FilmeRepository;
@@ -46,7 +47,7 @@ public class FilmeService {
     }
 
     public Filme getFilmePorId(Integer id){
-        return filmeRepository.findById(id).orElse(null);
+        return filmeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Filme não encontrado "+ id));
     }
 
     public List<Filme> getTodosFilmes(){
